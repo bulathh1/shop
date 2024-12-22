@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина</title>
+    <link rel="stylesheet" href="/styles/cartstyle.css"> 
+</head>
+<body>
+    <h1>Корзина</h1>
+
+    {{#if Cart.length}}
+    <ul>
+        {{#each Cart}}
+        <li>{{this.name}} - {{this.price}} ({{this.quantity}} шт.)</li>
+        {{/each}}
+    </ul>
+
+    <p>Общая стоимость: {{totalPrice}} руб.</p>
+
+    <form action="/clear-cart" method="POST" style="display:inline;">
+        <input type="submit" value="Очистить корзину" />
+    </form>
+
+    <a href="/checkout">Оформить список запчастей</a>
+    {{else}}
+    <p>Ваша корзина пуста.</p>
+    {{/if}}
+
+    <br /> <br />
+    <a class="back-to-store" href="/store">Назад к каталогу</a>
+</body>
+</html>

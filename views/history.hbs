@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История покупок</title>
+    <link rel="stylesheet" href="/styles/historystyle.css"> 
+</head>
+
+<body>
+    <h1>История покупок</h1>
+
+    {{#if orders.length}}
+        <table>
+            <thead>
+                <tr>
+                    <th>Номер заказа</th>
+                    <th>Имя</th>
+                    <th>Телефон</th>
+                    <th>email</th>
+                    <th>Способ оплаты</th>
+                    <th>Общая стоимость</th>
+                    <th>Дата создания</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orders}}
+                <tr>
+                    <td>{{this.orderId}}</td>
+                    <td>{{this.name}}</td>
+                    <td>{{this.phone}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.payment}}</td>
+                    <td>{{this.totalPrice}} руб.</td>
+                    <td>{{this.createdAt}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <p>История покупок пуста.</p>
+    {{/if}}
+
+    <a href="/">На главную</a>
+</body>
+
+</html>

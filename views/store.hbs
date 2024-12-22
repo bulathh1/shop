@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Магазин Автозапчастей </title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <meta charset="utf-8" />
+    <script>
+        function addToCart(partsId) {
+            fetch(`/add-to-cart/${partsId}`, {
+                method: 'GET'
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    return response.json();
+                }
+            })
+            .then(data => {
+                if (data && data.cartLen !== undefined) {
+                    document.getElementById("cartCount").innerText = data.cartLen;
+                }
+            })
+            .catch(error => console.error("Ошибка добавления в корзину:", error));
+        }
+    </script>
+</head>
+
+<body>
+    <h1> Магазин Автозапчастей</h1>
+    <p><a href="/create">Добавить запчасть</a></p>
+
+    <form action="/store" method="GET">
+        <label for="filterType">Выберите сортировку:</label>
+        <select name="filterType">
+            <option value="name" {{#if (eq filterType 'name')}}selected{{/if}}>По названию</option>
+            <option value="price" {{#if (eq filterType 'price')}}selected{{/if}}>По цене</option>
+        </select>
+        <input type="text" name="filter" placeholder="Введите значение для фильтрации" value="{{filter}}">
+        <button type="submit">Применить фильтр</button>
+    </form>
+ 
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Count</th>
+            <th>Actions</th>
+        </tr>
+
+        {{#each parts}}
+        <tr>
+            <td hidden>{{this.partsId}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.price}}</td>
+            <td>{{this.count}}</td>
+            <td>
+                <a href="/edit/{{this.partsId}}">Edit</a> |
+                <form action="delete/{{this.partsId}}" method="POST" style="display:inline;">
+                    <input type="submit" value="Delete" />
+                </form>
+                <button onclick="addToCart({{this.partsId}})">В корзину</button>
+            </td>
+        </tr>        
+        {{/each}}
+    </table>
+
+    <br />
+    <a href="/cart">Просмотр Корзины</a>
+    <a href="/">На главную</a>
+
+</body>
+</html>

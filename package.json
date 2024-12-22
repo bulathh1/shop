@@ -1,0 +1,23 @@
+{
+  "name": "serv",
+  "version": "0.0.0",
+  "description": "serv",
+  "main": "app.js",
+  "author": "",
+  "devDependencies": {
+    "eslint": "^8.21.0"
+  },
+  "eslintConfig": {},
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.1",
+    "express-handlebars": "^8.0.1",
+    "hbs": "^4.2.0",
+    "mysql2": "^3.11.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "license": "ISC"
+}

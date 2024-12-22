@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа</title>
+    <link rel="stylesheet" href="/styles/checkoutstyle.css"> 
+</head>
+
+<body>
+    <h2>Оформление заказа</h2>
+
+    {{#if cartStore.length}}
+        <p>Содержимое корзины:</p>
+        <ul>
+            {{#each cartStore}}
+                <li>{{this.name}} - {{this.price}} руб.</li>
+            {{/each}}
+        </ul>
+
+    <form action="/checkout" method="POST">
+        <label>Ваше имя: <input type="text" name="name" required></label>
+        <label>Номер телефона: <input type="text" name="phone" required></label>
+        <label>Email: <input type="email" name="email" required></label>
+        <p>Выберите способ оплаты:</p>
+        <label><input type="radio" name="payment" value="card" required> Банковской картой</label>
+        <label><input type="radio" name="payment" value="cash" required> Наличными курьеру</label>
+        <button type="submit">Оплатить заказ</button>
+    </form>
+    {{else}}
+        <p>Ваша корзина пуста. <a href="/store">Перейти к покупкам</a></p>
+    {{/if}}
+
+    <a href="/cart">Назад в корзину</a>
+</body>
+
+</html>

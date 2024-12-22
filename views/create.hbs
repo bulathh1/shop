@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ввод данных новой автозапчасти</title>
+    <meta charset="utf-8" />
+    <style>
+        .field {
+            width: 180px;
+        }
+    </style>
+</head>
+
+  <body>
+     <h1>Данные автозапчасти</h1>
+<form action="/create" method="POST">
+    <label>Id</label><br>
+    <input name="partsId" type="number" value="{{parts.partId}}" /> <br><br>
+
+    <label>Название запчасти</label><br>
+    <input name="name" value="{{parts.name}}" class="field" /><br><br>
+	
+	<label>Цена</label><br>
+    <input name="price" value="{{parts.price}}" class="field" /><br><br>
+	
+    <label>Количество</label><br>
+    <input name="count" type="number" min="1" max="100000"
+           value="{{parts.count}}" class="field" /><br><br>
+
+	<label>Поставщик</label><br>
+    <input name="suplierId" value="{{parts.suplierId}}" class="field" /><br><br>
+	
+    <input type="submit" value="Отправить" />
+</form>
+
+<a href="/">Каталог автозапчастей</a>  
+ </body>
+</html>
